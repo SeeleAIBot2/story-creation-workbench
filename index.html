@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="app-shell"><div class="browser">
-<header class="window-bar"><div class="traffic" aria-hidden="true"><i></i><i></i><i></i></div><div class="address">故事工作台 / 创作与修订</div><button id="toggle-context" aria-expanded="true" aria-controls="context-aside" title="展开或收起辅助区">辅助区 ◫</button></header>
+<header class="window-bar"><div class="traffic" aria-hidden="true"><i></i><i></i><i></i></div><button class="address command-trigger" id="open-commands" aria-haspopup="dialog" aria-controls="command-dialog">故事工作台 / 快捷操作 <kbd>⌘ K</kbd></button><button id="toggle-context" aria-expanded="true" aria-controls="context-aside" title="展开或收起辅助区">辅助区 ◫</button></header>
 <div class="shell">
 <aside class="sidebar" aria-label="项目与模块">
 <div class="logo" aria-hidden="true">叙</div><a class="brand" href="#task">故事工作台</a><p class="brand-sub">把想法写成故事，<br>让每一次修订有据可循。</p>
@@ -24,13 +24,14 @@
 <div class="stage-strip" aria-label="本轮准备情况"><div><span>本轮材料</span><strong id="progress-label">待填写</strong></div><progress id="task-progress" max="5" value="0" aria-label="本轮材料准备进度"></progress><p id="workspace-guide">先确定任务，再整理执行材料。</p></div>
 <div class="reader"><main id="main-content" tabindex="-1"></main><footer>本地保存 · 定期导出 JSON 备份 · 创作建议与待核事实请分别记录。</footer></div>
 </section>
-<aside class="assistant-panel" id="context-aside" aria-label="本轮上下文与执行">
+<div id="panel-resizer" role="separator" tabindex="0" aria-label="调整辅助区宽度，左右方向键调整，Home 重置" aria-orientation="vertical" aria-valuemin="240" aria-valuemax="440" aria-valuenow="290"></div><aside class="assistant-panel" id="context-aside" aria-label="本轮上下文与执行">
 <section class="aside-section"><div class="side-heading">本轮上下文 <span>CONTEXT</span></div><div id="project-summary" class="meta-grid"></div></section>
 <section class="aside-section"><div class="side-heading">参考与边界 <span>REFERENCE</span></div><div id="context-panel"></div></section>
 <section class="aside-section execution-section"><div class="side-heading">执行与回填 <span>HANDOFF</span></div><p class="muted">整理本轮表单与参考，交给你选择的模型；完成后粘贴结果核对。</p><button class="primary wide" id="prepare-prompt">整理执行指令</button><button class="wide" id="paste-result">粘贴模型结果</button><div id="output-count" class="muted"></div></section>
 <p class="local-notice">本站不会调用模型或上传稿件。外部使用前，请检查材料中的敏感信息。</p>
 </aside>
 </div></div></div>
+<dialog id="command-dialog"><div class="dialog-head"><h2>快速切换与操作</h2><button data-close="command-dialog">关闭</button></div><input id="command-search" type="search" aria-label="搜索模块与操作" placeholder="搜索模块、保存、导出或回填…"><div id="command-list" class="command-list"></div><p class="muted">⌘ / Ctrl + K 打开 · ↑ ↓ 选择 · Enter 执行 · Esc 关闭</p></dialog>
 <dialog id="project-dialog"><div class="dialog-head"><h2>项目与备份</h2><button data-close="project-dialog" aria-label="关闭项目与备份">关闭</button></div><p class="muted">自动保存当前项目；快照可恢复旧稿。浏览器清理数据或换设备后需用 JSON 备份恢复。共用设备上的其他使用者也可读取本地内容。</p><div class="toolbar"><button id="new-project">新建空白项目</button><button id="export-json" class="primary">导出项目 JSON</button><label class="file-button">导入项目 JSON<input id="import-json" type="file" accept=".json,application/json" hidden></label><button id="export-md">导出完整 Markdown</button><button id="copy-md">复制完整 Markdown</button></div><h3>本机项目</h3><div id="project-list"></div><h3>当前项目快照</h3><div id="snapshot-list"></div><p id="backup-status" role="status"></p></dialog>
 <dialog id="execution-dialog"><div class="dialog-head"><h2 id="execution-title">执行指令</h2><button data-close="execution-dialog">关闭</button></div><p class="muted" id="execution-hint"></p><textarea id="execution-text" aria-label="执行指令或模型结果" spellcheck="false"></textarea><div class="toolbar" id="execution-actions"></div></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
