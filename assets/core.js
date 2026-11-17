@@ -8,7 +8,8 @@ const schema={
  writing:{purpose:'固定剧情',medium:'剧本',viewpoint:'',start:'',end:'',before:'',after:'',source:'',draft:'',style:'',changes:'',status:'创意候选'},
  interactive:{modelControl:'',playerControl:'',period:'',known:'',unknown:'',authorSecrets:'',worldRules:'',recall:'',node:'',previous:'',state:'',pending:'',boundaries:'',publicSummary:''},
  handoff:{target:'',formatVersion:'',approvedVersion:'',scope:'',control:'',visible:'',constraints:'',unmapped:'',mapping:'',testStatus:'未测试'},
- validation:{product:'',modelId:'',mode:'',conditions:'',cost:'',review:'',inputs:'',outputs:'',failures:'',status:'未实测',checked:[]}
+ validation:{product:'',modelId:'',mode:'',conditions:'',cost:'',review:'',inputs:'',outputs:'',failures:'',status:'未实测',checked:[]},
+ drama:{title:'',platform:'',version:'',totalEpisodes:'',watchedEpisodes:'',unwatchedEpisodes:'',sourceMaterials:'',comparisonVersions:'',scope:'',purpose:'',opening:'',coreAttraction:'',mainDrive:'',factsBoundary:'',designNotes:''}
 };
 const recordSchema={
  directions:{title:'',logline:'',relationship:'',synopsis:'',distinct:'',status:'创意候选'},
@@ -17,7 +18,9 @@ const recordSchema={
  continuity:{id:'',version:'',branch:'',scene:'',time:'',place:'',present:'',known:'',items:'',state:'',relation:'',previous:'',next:'',uncertain:''},
  rules:{id:'',fact:'',source:'',status:'待核',applies:'',trigger:'',cost:'',limits:'',expiry:'',knowledge:'',evidence:'',uncertain:''},
  branches:{id:'',node:'',condition:'',choice:'',immediate:'',delayed:'',delta:'',next:'',merge:'',status:'设计候选'},
- cards:{id:'',name:'',layer:'',scope:'',experience:'',drive:'',mechanism:'',variation:'',boundary:'',source:'',version:'',test:'待审阅／待试用'}
+ cards:{id:'',name:'',layer:'',scope:'',experience:'',drive:'',mechanism:'',variation:'',boundary:'',source:'',version:'',test:'待审阅／待试用'},
+ dramaNodes:{episode:'',time:'',place:'',characters:'',event:'',goal:'',obstacle:'',response:'',active:'',informationGap:'',attraction:'',tension:'',emotion:'',relationship:'',factStatus:'',unfulfilled:'',next:'',opening:false,ending:false},
+ dramaEpisodes:{episode:'',openingHandoff:'',episodeGoal:'',escalation:'',choice:'',fulfilled:'',relationship:'',hook:'',nextExpectation:'',detailLevel:'精拆',notes:''}
 };
 function clone(v){return JSON.parse(JSON.stringify(v))}
 function uid(prefix='project'){return prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8)}

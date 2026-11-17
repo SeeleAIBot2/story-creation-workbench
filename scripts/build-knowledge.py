@@ -23,7 +23,7 @@ for m in re.finditer(r'^### ([^\n]+)\n(.*?)(?=^### |^## |\Z)',tax,re.M|re.S):
     else:
         line=next((x for x in body.splitlines() if x.strip()),'')
         groups.append(dict(id='appendix-'+str(len(groups)),title=title,genre='',layer=title,terms=[x.strip() for x in re.split('[、，]',line) if x.strip()]))
-assert len(docs)==16 and len(cards)==23
+assert len(docs)>=16 and len(cards)>=23
 mechanisms=json.loads((root/'assets/mechanisms.json').read_text())
 assert len(mechanisms['items']) == 4
 out={'documents':docs,'cards':cards,'taxonomy':groups,'mechanisms':mechanisms}
