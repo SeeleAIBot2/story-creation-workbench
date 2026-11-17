@@ -24,6 +24,8 @@ for m in re.finditer(r'^### ([^\n]+)\n(.*?)(?=^### |^## |\Z)',tax,re.M|re.S):
         line=next((x for x in body.splitlines() if x.strip()),'')
         groups.append(dict(id='appendix-'+str(len(groups)),title=title,genre='',layer=title,terms=[x.strip() for x in re.split('[、，]',line) if x.strip()]))
 assert len(docs)==16 and len(cards)==23
-out={'documents':docs,'cards':cards,'taxonomy':groups}
-(root/'assets/knowledge.js').write_text('/* Generated only from the public skill/ directory. */\nwindow.WorkbenchKnowledge = '+json.dumps(out,ensure_ascii=False,indent=2)+';\n')
+mechanisms=json.loads((root/'assets/mechanisms.json').read_text())
+assert len(mechanisms['items']) == 4
+out={'documents':docs,'cards':cards,'taxonomy':groups,'mechanisms':mechanisms}
+(root/'assets/knowledge.js').write_text('/* Generated from public skill/ and assets/mechanisms.json. */\nwindow.WorkbenchKnowledge = '+json.dumps(out,ensure_ascii=False,indent=2)+';\n')
 print(len(docs),'documents;',len(cards),'cards;',len(groups),'taxonomy groups;',sum(len(g['terms']) for g in groups),'placed tags')
